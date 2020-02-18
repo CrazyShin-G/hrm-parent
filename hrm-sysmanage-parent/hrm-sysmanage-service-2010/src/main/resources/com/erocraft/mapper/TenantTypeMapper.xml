@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erocraft.mapper.TenantTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.erocraft.domain.TenantType">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+              <if test="keyword!=null and keyword!=''">
+                  and (name like concat('%',#{keyword},'%') or description like concat('%',#{keyword},'%'))
+              </if>
+        </where>
+    </sql>
+
+    <select id="loadPageLiset" resultType="TenantType">
+        select * from t_tenant_type 
+        <include refid="whereSql"></include>
+    </select>
+
+</mapper>

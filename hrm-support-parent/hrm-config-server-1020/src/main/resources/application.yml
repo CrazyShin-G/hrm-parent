@@ -1,0 +1,19 @@
+server:
+  port: 1020
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1010/eureka
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: hrm-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/CrazyShin-G/hrm-config.git
+          username: CrazyShin-G
+          password: 141799@qq.com
+          search-paths: src/main/resources

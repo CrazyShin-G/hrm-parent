@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    config:
+      name: application-zuul
+      profile: ${spring.profiles.active}
+      label: master
+      discovery:
+        enabled: true
+        service-id: hrm-config-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1010/eureka
+  instance:
+    prefer-ip-address: true

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hrm-basic-util" />
+        <module name="mybatisplus-gen" />
+        <module name="hrm-course-common" />
+        <module name="hrm-eureka-1010" />
+        <module name="hrm-support-parent" />
+        <module name="hrm-sysmanage-common" />
+        <module name="hrm-common-service-2090" />
+        <module name="hrm-config-server-1020" />
+        <module name="hrm-zuul-gateway-1030" />
+        <module name="hrm-sysmanage-service-2010" />
+        <module name="hrm-course-service-2020" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hrm-basic-util" options="-parameters" />
+      <module name="hrm-common-parent" options="-parameters" />
+      <module name="hrm-common-service-2090" options="-parameters" />
+      <module name="hrm-config-server-1020" options="-parameters" />
+      <module name="hrm-course-common" options="-parameters" />
+      <module name="hrm-course-parent" options="-parameters" />
+      <module name="hrm-course-service-2020" options="-parameters" />
+      <module name="hrm-eureka-1010" options="-parameters" />
+      <module name="hrm-parent" options="-parameters" />
+      <module name="hrm-support-parent" options="-parameters" />
+      <module name="hrm-sysmanage-common" options="-parameters" />
+      <module name="hrm-sysmanage-parent" options="-parameters" />
+      <module name="hrm-sysmanage-service-2010" options="-parameters" />
+      <module name="hrm-zuul-gateway-1030" options="-parameters" />
+      <module name="mybatisplus-gen" options="-parameters" />
+    </option>
+  </component>
+</project>
