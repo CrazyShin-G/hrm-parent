@@ -17,12 +17,16 @@
         <module name="hrm-zuul-gateway-1030" />
         <module name="hrm-sysmanage-service-2010" />
         <module name="hrm-course-service-2020" />
+        <module name="hrm-common-client" />
+        <module name="hrm-common-common" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="hrm-basic-util" options="-parameters" />
+      <module name="hrm-common-client" options="-parameters" />
+      <module name="hrm-common-common" options="-parameters" />
       <module name="hrm-common-parent" options="-parameters" />
       <module name="hrm-common-service-2090" options="-parameters" />
       <module name="hrm-config-server-1020" options="-parameters" />

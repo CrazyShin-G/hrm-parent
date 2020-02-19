@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>hrm-common-service-2090</module>
+        <module>hrm-common-common</module>
+        <module>hrm-common-client</module>
     </modules>
 
 </project>

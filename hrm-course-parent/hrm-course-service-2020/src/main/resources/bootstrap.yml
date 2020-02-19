@@ -15,3 +15,18 @@ eureka:
       defaultZone: http://localhost:1010/eureka
   instance:
     prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      remote-service:
+        connectTimeout: 3000
+        readTimeout: 3000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
