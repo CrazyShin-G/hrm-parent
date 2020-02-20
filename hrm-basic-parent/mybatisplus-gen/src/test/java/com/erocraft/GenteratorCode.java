@@ -44,10 +44,10 @@ public class GenteratorCode {
         strategy.setNaming(NamingStrategy.underline_to_camel);
         //strategy.setInclude(new String[]{"t_systemdictionary","t_systemdictionaryitem","t_tenant_type"}); // 需要生成的表
         //strategy.setInclude(new String[]{"t_department", "t_employee","t_role","t_permission","t_menu","t_tenant","t_meal"}); // 需要生成的表
-        strategy.setInclude(new String[]{"t_course_type"});
+        strategy.setInclude(new String[]{"t_course","t_course_detail","t_course_resource","t_course_market"});
 
         mpg.setStrategy(strategy);
-        // 包配置
+
         PackageConfig pc = new PackageConfig();
         pc.setParent(rb.getString("parent"));
         pc.setController("controller");
@@ -68,14 +68,14 @@ public class GenteratorCode {
 
         List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
 
-        // 调整 domain 生成目录演示
+
         focList.add(new FileOutConfig("/templates/entity.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 return rb.getString("OutputCommonDirBase")+ "/com/erocraft/domain/" + tableInfo.getEntityName() + ".java";
             }
         });
-        //query
+
         focList.add(new FileOutConfig("/templates/query.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
