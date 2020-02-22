@@ -7,6 +7,7 @@ import com.erocraft.domain.Course;
 import com.erocraft.query.CourseQuery;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -19,4 +20,8 @@ import java.util.List;
 public interface CourseMapper extends BaseMapper<Course> {
 
     List<Course> loadPageList(Page<Course> page, CourseQuery query);
+
+    void onLine(Map<String, Object> params);
+
+    void offLine(Map<String, Object> params);
 }

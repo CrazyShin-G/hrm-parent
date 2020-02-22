@@ -28,7 +28,7 @@ public class CourseController {
             return AjaxResult.me();
         } catch (Exception e) {
             e.printStackTrace();
-            return AjaxResult.me().setMessage("保存对象失败！"+e.getMessage());
+            return AjaxResult.me().setMessage("保存失败！"+e.getMessage());
         }
     }
 
@@ -39,14 +39,14 @@ public class CourseController {
             return AjaxResult.me();
         } catch (Exception e) {
         e.printStackTrace();
-            return AjaxResult.me().setMessage("删除对象失败！"+e.getMessage());
+            return AjaxResult.me().setMessage("删除失败！"+e.getMessage());
         }
     }
 
 	@PutMapping
     public AjaxResult addOrUpdate(@RequestBody Course course){
         try {
- /*            @TODO 以后登录成功都能获取,现在使用holder来模拟
+           /*  @TODO 以后登录成功都能获取,现在使用holder来模拟
             登录成功后设置到UserInfoHolder，以后所有模块要使用都直接使用UserInfoHolder
             course.setTenantId(UserInfoHolder.getTenant().getId());
             course.setTenantName(UserInfoHolder.getTenant().getCompanyName());
@@ -71,13 +71,11 @@ public class CourseController {
         return courseService.selectById(id);
     }
 
-
     @GetMapping
     public List<Course> list(){
 
         return courseService.selectList(null);
     }
-
 
     @PostMapping("/list")
     public PageList<Course> json(@RequestBody CourseQuery query)
@@ -85,15 +83,14 @@ public class CourseController {
         return courseService.selectpageList(query);
     }
 
-
     @PostMapping("/onLine")
-    public AjaxResult onLine(Long[] ids){
-
+    public AjaxResult onLine(@RequestBody Long[] ids){
         return courseService.onLine(ids);
     }
 
     @PostMapping("/offLine")
-    public AjaxResult offLine(Long[] ids){
+    public AjaxResult offLine(@RequestBody Long[] ids){
+
         return courseService.offLine(ids);
     }
 }
