@@ -30,22 +30,22 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hrm-course-parent/hrm-course-service-2020/src/main/java/com/erocraft/controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hrm-support-parent/hrm-zuul-gateway-1030/src/main/java/com/erocraft/config" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\spring\hrm-parent\hrm-support-parent\hrm-zuul-gateway-1030\src\main\java\com\erocraft\config" />
+      <recent name="D:\spring\hrm-parent\hrm-page-parent\hrm-page-service-2030\src\test\java\com\erocraft" />
+      <recent name="D:\spring\hrm-parent\hrm-page-parent\hrm-page-service-2030\src\main\resources\com\erocraft\mapper" />
+      <recent name="D:\spring\hrm-parent\hrm-page-parent\hrm-page-service-2030\src\main\resources" />
+      <recent name="D:\spring\hrm-parent\hrm-page-parent\hrm-page-service-2030\src\main\java\com\erocraft" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\spring\hrm-parent\hrm-basic-parent\mybatisplus-gen\src\main\resources" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\spring\hrm-parent\hrm-course-parent\hrm-course-service-2020\src\main\java\com\erocraft\controller" />
-      <recent name="D:\spring\hrm-parent\hrm-course-parent\hrm-course-service-2020\src\main\java\com\erocraft\service\impl" />
-      <recent name="D:\spring\hrm-parent\hrm-course-parent\hrm-course-service-2020\src\main\java\com\erocraft\mapper" />
-      <recent name="D:\spring\hrm-parent\hrm-course-parent\hrm-course-service-2020\src\main\resources\com\erocraft\mapper" />
-      <recent name="D:\spring\hrm-parent\hrm-course-parent\hrm-course-service-2020\src\main\java\com\erocraft\service" />
     </key>
   </component>
   <component name="RunManager">
@@ -90,6 +90,8 @@
       <workItem from="1582094854199" duration="4106000" />
       <workItem from="1582203342049" duration="2989000" />
       <workItem from="1582385822631" duration="1209000" />
+      <workItem from="1582461372538" duration="164000" />
+      <workItem from="1582622769104" duration="3519000" />
     </task>
     <servers />
   </component>
@@ -101,18 +103,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1581953684007" />
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1582625203145">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582625203145" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1582105913620">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582105913620" />
-    <state x="616" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1582385850175">
+    <state x="616" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1582461501320">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="344" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582385850175" />
-    <state x="334" y="126" key="new project wizard" timestamp="1582105557453">
+    <state x="616" y="344" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582461501320" />
+    <state x="334" y="126" key="new project wizard" timestamp="1582625703382">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="334" y="126" key="new project wizard/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582105557453" />
+    <state x="334" y="126" key="new project wizard/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582625703382" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

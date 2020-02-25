@@ -17,4 +17,6 @@ import java.util.List;
 public interface ICourseTypeService extends IService<CourseType> {
 
     List<CourseType> treeData(long pid);
+
+    void staticIndexPageInit();
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erocraft.mapper.PagerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.erocraft.domain.Pager">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="sn" property="sn" />
+        <result column="alias" property="alias" />
+        <result column="type" property="type" />
+        <result column="site_id" property="siteId" />
+        <result column="createTime" property="createTime" />
+        <result column="status" property="status" />
+        <result column="physicalPath" property="physicalPath" />
+        <result column="template_url" property="templateUrl" />
+        <result column="templateName" property="templateName" />
+    </resultMap>
+
+</mapper>

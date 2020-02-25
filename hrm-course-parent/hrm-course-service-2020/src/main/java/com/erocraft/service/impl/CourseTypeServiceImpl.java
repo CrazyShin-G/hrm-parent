@@ -1,9 +1,12 @@
 package com.erocraft.service.impl;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.erocraft.cache.ICourseTypeCache;
+import com.erocraft.client.PageConfigClient;
+import com.erocraft.client.RedisClient;
 import com.erocraft.domain.CourseType;
 import com.erocraft.mapper.CourseTypeMapper;
 import com.erocraft.service.ICourseTypeService;
@@ -32,16 +35,33 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
 
     @Autowired
     private ICourseTypeCache courseTypeCache;
+
+    @Autowired
+    private PageConfigClient pageConfigClient;
+
+    @Autowired
+    private RedisClient redisClient;
+
+    @Override
+    public void staticIndexPageInit() {
+
+        String pageName = "CourseSiteIndex";
+        String dataKey="CourseSiteIndex_data";
+        List<CourseType> courseTypes = this.treeData(0L);
+        Map<String,Object> courseTypeSdata = new HashMap<>();
+        courseTypeSdata.put("courseTypes",courseTypes);
+        redisClient.add(dataKey, JSONArray.toJSONString(courseTypeSdata));
+        pageConfigClient.staticPage(pageName,dataKey);
+    }
+
     @Override
     public List<CourseType> treeData(long pid) {
-
         List<CourseType>courseTypes = courseTypeCache.getTreeData();
         if (courseTypes!=null && courseTypes.size()>0){
             System.out.println("cache ....");
             return courseTypes;
         }else{
             System.out.println("db....");
-
             List<CourseType> courseTypesOfDb = treeDataLoop(pid);
             courseTypeCache.setTreeData(courseTypesOfDb);
             return courseTypesOfDb;
@@ -51,7 +71,6 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
 
     private List<CourseType> treeDataLoop(long pid) {
         List<CourseType> allNodes = courseTypeMapper.selectList(null);
-
         Map<Long,CourseType>  allNodeDto = new HashMap<>();
         for (CourseType courseType : allNodes) {
             allNodeDto.put(courseType.getId(),courseType);
@@ -61,7 +80,6 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
             if (courseType.getPid().intValue()==0) {
                 result.add(courseType);
             }else{
-
                 Long pidTmp = courseType.getPid();
                 CourseType parent = allNodeDto.get(pidTmp);
                 parent.getChildren().add(courseType);

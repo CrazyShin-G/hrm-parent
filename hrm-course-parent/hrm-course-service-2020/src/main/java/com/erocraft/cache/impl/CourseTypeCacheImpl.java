@@ -16,9 +16,8 @@ import java.util.List;
 @Component
 public class CourseTypeCacheImpl implements ICourseTypeCache {
 
+    private final static String COURSETYPE_KEY_IN_CACHE = "courseType_Key_in_cache";
 
-    private final static String COURSETYPE_KEY_IN_CACHE
-            = "courseType_Key_in_cache";
     @Autowired
     private RedisClient redisClient;
 

@@ -28,7 +28,7 @@ public class CourseTypeController {
             return AjaxResult.me();
         } catch (Exception e) {
             e.printStackTrace();
-            return AjaxResult.me().setMessage("保存对象失败！"+e.getMessage());
+            return AjaxResult.me().setMessage("保存失败"+e.getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ public class CourseTypeController {
             return AjaxResult.me();
         } catch (Exception e) {
         e.printStackTrace();
-            return AjaxResult.me().setMessage("删除对象失败！"+e.getMessage());
+            return AjaxResult.me().setMessage("删除失败"+e.getMessage());
         }
     }
 
@@ -51,11 +51,10 @@ public class CourseTypeController {
             }else{
                 courseTypeService.insert(courseType);
             }
-
             return AjaxResult.me();
         } catch (Exception e) {
             e.printStackTrace();
-            return AjaxResult.me().setMessage("保存对象失败！"+e.getMessage());
+            return AjaxResult.me().setMessage("保存失败"+e.getMessage());
         }
     }
 
@@ -67,7 +66,6 @@ public class CourseTypeController {
 
     @GetMapping
     public List<CourseType> list(){
-
         return courseTypeService.selectList(null);
     }
 
@@ -77,6 +75,19 @@ public class CourseTypeController {
         Page<CourseType> page = new Page<CourseType>(query.getPage(),query.getRows());
         page = courseTypeService.selectPage(page);
         return new PageList<CourseType>(page.getTotal(),page.getRecords());
+    }
+
+    @PostMapping("/staticIndexPageInit")
+    public AjaxResult staticIndexPageInit()
+    {
+        try{
+            courseTypeService.staticIndexPageInit();
+            return AjaxResult.me();
+        }catch (Exception e){
+            e.printStackTrace();
+            return AjaxResult.me().setSuccess(false).setMessage(e.getMessage());
+        }
+
     }
 
     @GetMapping("/treeData")
