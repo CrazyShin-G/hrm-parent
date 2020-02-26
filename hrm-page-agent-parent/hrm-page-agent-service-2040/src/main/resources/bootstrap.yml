@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    config:
+      name: application-page-agent #github上面名称
+      profile: ${spring.profiles.active} #环境 java -jar -D xxx jar
+      label: master #分支
+      discovery:
+        enabled: true #从eureka上面找配置服务
+        service-id: hrm-config-server
+eureka: #eureka不能放到远程配置中
+  client:
+    service-url:
+      defaultZone: http://localhost:1010/eureka  #告诉服务提供者要把服务注册到哪儿 #单机环境
+  instance:
+    prefer-ip-address: true #显示客户端真实ip
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      remote-service:
+        connectTimeout: 3000
+        readTimeout: 3000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000

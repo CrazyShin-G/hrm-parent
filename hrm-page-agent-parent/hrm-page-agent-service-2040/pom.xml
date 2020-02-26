@@ -3,23 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>hrm-common-parent</artifactId>
+        <artifactId>hrm-page-agent-parent</artifactId>
         <groupId>org.example</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hrm-common-service-2090</artifactId>
+    <artifactId>hrm-page-agent-service-2040</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!-- Eureka 客户端依赖 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -32,51 +34,31 @@
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-
+        <!-- 通过公共rabbitmq的模块引入mq的jar包-->
         <dependency>
             <groupId>org.example</groupId>
-            <artifactId>hrm-basic-util</artifactId>
+            <artifactId>hrm-basic-rabbitmq</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--        fastdfs包-->
-        <!-- https://mvnrepository.com/artifact/cn.bestwu/fastdfs-client-java -->
+        <!--        fastdfsclient支持-->
         <dependency>
-            <groupId>cn.bestwu</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
-            <version>1.27</version>
+            <groupId>org.example</groupId>
+            <artifactId>hrm-common-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--redis客户端-jedis-->
-        <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-
+        <!-- 给调用的模块来转换json-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson  调用者需要转换-->
         <dependency>
-            <groupId>org.csource.fastdfs</groupId>
-            <artifactId>fastdfs</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
         </dependency>
     </dependencies>
 

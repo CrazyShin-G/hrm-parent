@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.erocraft.domain.CourseType;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -19,4 +20,6 @@ public interface ICourseTypeService extends IService<CourseType> {
     List<CourseType> treeData(long pid);
 
     void staticIndexPageInit();
+
+    List<Map<String, Object>> queryCrumbs(Long courseTypeId);
 }

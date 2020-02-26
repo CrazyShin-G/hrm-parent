@@ -9,11 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hrm-basic-parent</artifactId>
+    <artifactId>hrm-page-agent-parent</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>hrm-basic-util</module>
-        <module>mybatisplus-gen</module>
-        <module>hrm-basic-rabbitmq</module>
+        <module>hrm-page-agent-service-2040</module>
     </modules>
+
+
 </project>

@@ -6,15 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hrm-page-parent" />
+        <module name="hrm-course-service-2020" />
+        <module name="hrm-basic-rabbitmq" />
         <module name="hrm-course-common" />
         <module name="hrm-support-parent" />
         <module name="hrm-config-server-1020" />
         <module name="hrm-eureka-1010" />
-        <module name="hrm-course-service-2020" />
         <module name="hrm-sysmanage-common" />
         <module name="hrm-common-service-2090" />
         <module name="hrm-common-common" />
+        <module name="hrm-basic-util" />
         <module name="hrm-sysmanage-service-2010" />
         <module name="hrm-page-common" />
         <module name="mybatisplus-gen" />
@@ -22,12 +23,14 @@
         <module name="hrm-zuul-gateway-1030" />
         <module name="hrm-page-client" />
         <module name="hrm-page-service-2030" />
-        <module name="hrm-basic-util" />
+        <module name="hrm-page-parent" />
+        <module name="hrm-page-agent-service-2040" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hrm-basic-rabbitmq" options="-parameters" />
       <module name="hrm-basic-util" options="-parameters" />
       <module name="hrm-common-client" options="-parameters" />
       <module name="hrm-common-common" options="-parameters" />
@@ -38,6 +41,8 @@
       <module name="hrm-course-parent" options="-parameters" />
       <module name="hrm-course-service-2020" options="-parameters" />
       <module name="hrm-eureka-1010" options="-parameters" />
+      <module name="hrm-page-agent-parent" options="-parameters" />
+      <module name="hrm-page-agent-service-2040" options="-parameters" />
       <module name="hrm-page-client" options="-parameters" />
       <module name="hrm-page-common" options="-parameters" />
       <module name="hrm-page-parent" options="-parameters" />

@@ -28,16 +28,16 @@ public class FeignFastDfsTest {
 
     @Test
     public void download() throws Exception {
-        Response response = fastDfsClient.download("/group1/M00/00/04/rAEABG6TNQWACj5qAACAMM9O0Ak762.zip");
+        Response response = fastDfsClient.download("/group1/M00/00/06/rBEABV5WCmeARTFiAASMg1K0SnM43.html");
         InputStream inputStream = response.body().asInputStream();
-        IOUtils.copy(inputStream,new FileOutputStream("d://test.zip"));
+        IOUtils.copy(inputStream,new FileOutputStream("d://test.html"));
 
     }
 
 
     @Test
     public void upload() {
-        MultipartFile file = new CommonsMultipartFile(createFileItem(new File("d://Pager.vue")));
+        MultipartFile file = new CommonsMultipartFile(createFileItem(new File("d://home.vm.html")));
         AjaxResult ajaxResult = fastDfsClient.upload(file);
         System.out.println(ajaxResult.getResultObj());
     }

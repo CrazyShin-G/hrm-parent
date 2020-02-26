@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 14179
@@ -21,6 +22,10 @@ public class CourseTypeController {
     @Autowired
     public ICourseTypeService courseTypeService;
 
+    @GetMapping("/crumbs/{courseTypeId}")
+    public List<Map<String,Object>> queryCrumbs(@PathVariable("courseTypeId") Long courseTypeId){
+        return courseTypeService.queryCrumbs(courseTypeId);
+    }
 	@PostMapping
     public AjaxResult add(@RequestBody CourseType courseType){
         try {
@@ -51,6 +56,7 @@ public class CourseTypeController {
             }else{
                 courseTypeService.insert(courseType);
             }
+
             return AjaxResult.me();
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +72,7 @@ public class CourseTypeController {
 
     @GetMapping
     public List<CourseType> list(){
+
         return courseTypeService.selectList(null);
     }
 

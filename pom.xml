@@ -15,6 +15,7 @@
         <module>hrm-common-parent</module>
         <module>hrm-course-parent</module>
         <module>hrm-page-parent</module>
+        <module>hrm-page-agent-parent</module>
     </modules>
     <!--springboot仲裁中心-->
     <parent>

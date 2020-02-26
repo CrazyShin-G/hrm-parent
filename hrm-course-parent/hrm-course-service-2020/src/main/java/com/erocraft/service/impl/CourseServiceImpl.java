@@ -15,7 +15,15 @@ import com.erocraft.query.CourseQuery;
 import com.erocraft.service.ICourseService;
 import com.erocraft.util.AjaxResult;
 import com.erocraft.util.PageList;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -33,10 +41,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Autowired
     private CourseMapper courseMapper;
+
     @Autowired
     private CourseDetailMapper courseDetailMapper;
     @Autowired
     private CourseMarketMapper courseMarketMapper;
+
     @Autowired
     private EsCourseRepository repository;
     @Override
@@ -64,7 +74,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Override
     public boolean updateById(Course entity) {
-        //@TODO 修改也要同步修改多个表和索引库，删除也要同步删除多个表和索引库
+
         return super.updateById(entity);
     }
 
@@ -75,8 +85,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         try
         {
-            List<Course> courses = courseMapper
-                    .selectBatchIds(Arrays.asList(ids));
+            List<Course> courses = courseMapper.selectBatchIds(Arrays.asList(ids));
             List<EsCourse> esCourses = courses2EsCourses(courses);
             repository.saveAll(esCourses);
             Map<String,Object> params = new HashMap<>();
@@ -103,7 +112,6 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             Map<String,Object> params = new HashMap<>();
             params.put("ids",ids);
             params.put("offLineTime",new Date());
-
             courseMapper.offLine(params);
             return AjaxResult.me();
         }catch (Exception e){
@@ -111,6 +119,21 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             return AjaxResult.me().setSuccess(false).setMessage("下线失败！"+e.getMessage());
         }
 
+    }
+
+    @Override
+    public PageList<EsCourse> queryCourses(CourseQuery query) {
+
+        NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        builder.withQuery(boolQuery);
+        FieldSortBuilder order = SortBuilders.fieldSort(query.getSortField()).order(SortOrder.DESC);
+        builder.withSort(order);
+        builder.withPageable(PageRequest.of(query.getPage()-1,query.getRows()));
+        NativeSearchQuery esQuery = builder.build();
+        org.springframework.data.domain.Page<EsCourse> page =
+                repository.search(esQuery);
+        return new PageList<>(page.getTotalElements(),page.getContent());
     }
 
     private List<EsCourse> courses2EsCourses(List<Course> courses) {
@@ -127,7 +150,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         result.setName(course.getName());
         result.setUsers(course.getUsers());
         result.setCourseTypeId(course.getCourseTypeId());
-        if (course.getCourseType() != null) result.setCourseTypeName(course.getCourseType().getName());
+        if (course.getCourseType() != null)
+            result.setCourseTypeName(course.getCourseType().getName());
         result.setGradeId(course.getGrade());
         result.setGradeName(course.getGradeName());
         result.setStatus(course.getStatus());

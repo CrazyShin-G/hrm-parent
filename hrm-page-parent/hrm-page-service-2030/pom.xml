@@ -93,7 +93,12 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
-
+        <!-- 通过公共rabbitmq的模块引入mq的jar包-->
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>hrm-basic-rabbitmq</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 </project>

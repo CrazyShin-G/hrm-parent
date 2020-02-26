@@ -16,6 +16,8 @@ public class GlobalCorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://127.0.0.1:6001");
         config.addAllowedOrigin("http://localhost:6001");
+        config.addAllowedOrigin("http://127.0.0.1:6002");
+        config.addAllowedOrigin("http://localhost:6002");
         config.setAllowCredentials(true);
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");

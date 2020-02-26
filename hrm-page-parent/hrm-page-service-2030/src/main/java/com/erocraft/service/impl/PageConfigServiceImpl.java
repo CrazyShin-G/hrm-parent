@@ -10,8 +10,10 @@ import com.erocraft.domain.PageConfig;
 import com.erocraft.domain.Pager;
 import com.erocraft.mapper.PageConfigMapper;
 import com.erocraft.mapper.PagerMapper;
+import com.erocraft.mapper.SiteMapper;
 import com.erocraft.service.IPageConfigService;
 import com.erocraft.util.AjaxResult;
+import com.erocraft.util.RabbitMqConstants;
 import com.erocraft.utils.VelocityUtils;
 import com.erocraft.utils.ZipUtil;
 import feign.Response;
@@ -19,6 +21,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -40,7 +43,6 @@ import java.util.Map;
 @Service
 public class PageConfigServiceImpl extends ServiceImpl<PageConfigMapper, PageConfig> implements IPageConfigService {
 
-
     @Autowired
     private PagerMapper pagerMapper;
 
@@ -53,6 +55,11 @@ public class PageConfigServiceImpl extends ServiceImpl<PageConfigMapper, PageCon
     @Autowired
     private PageConfigMapper pageConfigMapper;
 
+    @Autowired
+    private SiteMapper siteMapper;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
     @Override
     public void staticPage(String pageName, String dataKey){
         List<Pager> pagers = pagerMapper.selectList(new EntityWrapper<Pager>().eq("name", pageName));
@@ -67,9 +74,13 @@ public class PageConfigServiceImpl extends ServiceImpl<PageConfigMapper, PageCon
         System.out.println("静态化页面地址："+staticPath);
         VelocityUtils.staticByTemplate(model,tempatePath,staticPath);
         AjaxResult ajaxResult = fastDfsClient.upload(new CommonsMultipartFile(createFileItem(new File(staticPath))));
-        addPageConfig(dataKey, pager, templateUrl, ajaxResult);
-        //@TODO 六 发送Message到mq中
-
+        PageConfig pageConfig = addPageConfig(dataKey, pager, templateUrl, ajaxResult);
+        String routingKey = siteMapper.selectById(pager.getSiteId()).getSn();
+        Map<String,Object> params = new HashMap<>();
+        params.put(RabbitMqConstants.FILE_SYS_TYPE,pageConfig.getDfsType());
+        params.put(RabbitMqConstants.PAGE_URL,pageConfig.getPageUrl());
+        params.put(RabbitMqConstants.PHYSICAL_PATH,pageConfig.getPhysicalPath());
+        rabbitTemplate.convertAndSend(RabbitMqConstants.EXCHANGE_TOPICS_PAGE,routingKey,JSONObject.toJSONString(params));
 
     }
 
@@ -117,7 +128,7 @@ public class PageConfigServiceImpl extends ServiceImpl<PageConfigMapper, PageCon
         return model;
     }
 
-    private void addPageConfig(String dataKey, Pager pager, String templateUrl, AjaxResult ajaxResult) {
+    private PageConfig addPageConfig(String dataKey, Pager pager, String templateUrl, AjaxResult ajaxResult) {
         PageConfig pageConfig = new PageConfig();
         pageConfig.setTemplateUrl(templateUrl);
         pageConfig.setTemplateName(pager.getTemplateName());
@@ -127,6 +138,7 @@ public class PageConfigServiceImpl extends ServiceImpl<PageConfigMapper, PageCon
         pageConfig.setPageUrl((String) ajaxResult.getResultObj());
         pageConfig.setPageId(pager.getId());
         pageConfigMapper.insert(pageConfig);
+        return pageConfig;
     }
 
     private FileItem createFileItem(File file) {

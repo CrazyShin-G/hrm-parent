@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -44,7 +41,6 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
 
     @Override
     public void staticIndexPageInit() {
-
         String pageName = "CourseSiteIndex";
         String dataKey="CourseSiteIndex_data";
         List<CourseType> courseTypes = this.treeData(0L);
@@ -53,6 +49,35 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
         redisClient.add(dataKey, JSONArray.toJSONString(courseTypeSdata));
         pageConfigClient.staticPage(pageName,dataKey);
     }
+
+    @Override
+    public List<Map<String, Object>> queryCrumbs(Long courseTypeId) {
+        List<Map<String,Object>> result = new ArrayList<>();
+        String path = courseTypeMapper.selectById(courseTypeId).getPath();
+        path = path.substring(1,path.length()-1);
+        System.out.println(path);
+        String[] paths = path.split("\\.");
+        for (String idStr : paths) {
+            Map<String,Object> node = new HashMap<>();
+            CourseType owerCourseType = courseTypeMapper.selectById(Long.valueOf(idStr));
+            node.put("ownerCourseType",owerCourseType);
+            Long pid = owerCourseType.getPid();
+            List<CourseType> allChirdren = courseTypeMapper.selectList(new EntityWrapper<CourseType>().eq("pid", pid));
+            Iterator<CourseType> iterator = allChirdren.iterator();
+            while (iterator.hasNext()){
+                CourseType type = iterator.next();
+                if (owerCourseType.getId().intValue()==type.getId().intValue()){
+                    iterator.remove();
+                    break;
+                }
+            }
+            node.put("otherCourseTypes",allChirdren);
+            result.add(node);
+        }
+
+        return result;
+    }
+
 
     @Override
     public List<CourseType> treeData(long pid) {
@@ -90,6 +115,7 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
         return  result;
     }
 
+
     private List<CourseType> treeDataRecursion(long pid) {
         List<CourseType> children = courseTypeMapper.selectList(new EntityWrapper<CourseType>().eq("pid", pid));
         if (children==null || children.size()<1){
@@ -109,6 +135,7 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
 
         courseTypeMapper.insert(entity);
         courseTypeCache.setTreeData(treeDataLoop(0));
+        staticIndexPageInit();
         return true;
     }
 
@@ -116,6 +143,7 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
     public boolean deleteById(Serializable id) {
         courseTypeMapper.deleteById(id);
         courseTypeCache.setTreeData(treeDataLoop(0));
+        staticIndexPageInit();
         return true;
     }
 
@@ -123,6 +151,7 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
     public boolean updateById(CourseType entity) {
         courseTypeMapper.updateById(entity);
         courseTypeCache.setTreeData(treeDataLoop(0));
+        staticIndexPageInit();
         return true;
     }
 }
