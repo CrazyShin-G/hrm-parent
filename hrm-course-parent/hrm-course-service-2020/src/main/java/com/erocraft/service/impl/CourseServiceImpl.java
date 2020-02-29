@@ -1,6 +1,7 @@
 package com.erocraft.service.impl;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.erocraft.domain.Course;
@@ -11,11 +12,13 @@ import com.erocraft.index.repository.EsCourseRepository;
 import com.erocraft.mapper.CourseDetailMapper;
 import com.erocraft.mapper.CourseMapper;
 import com.erocraft.mapper.CourseMarketMapper;
+import com.erocraft.mapper.CourseTypeMapper;
 import com.erocraft.query.CourseQuery;
 import com.erocraft.service.ICourseService;
 import com.erocraft.util.AjaxResult;
 import com.erocraft.util.PageList;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -25,7 +28,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -74,7 +79,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Override
     public boolean updateById(Course entity) {
-
+        //@TODO 修改也要同步修改多个表和索引库，删除也要同步删除多个表和索引库，要通过更新静态化页面
         return super.updateById(entity);
     }
 
@@ -92,6 +97,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             params.put("ids",ids);
             params.put("onLineTime",new Date());
             courseMapper.onLine(params);
+            //@TODO 课程详情页静态化处理
             return AjaxResult.me();
         }catch (Exception e){
             e.printStackTrace();
@@ -113,6 +119,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             params.put("ids",ids);
             params.put("offLineTime",new Date());
             courseMapper.offLine(params);
+            //@TODO 要删除静态化页面
             return AjaxResult.me();
         }catch (Exception e){
             e.printStackTrace();
@@ -126,9 +133,25 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        if (StringUtils.hasLength(query.getKeyword())) {
+            boolQuery.must(QueryBuilders.matchQuery("all",query.getKeyword()));
+        }
+        List<QueryBuilder> filter = boolQuery.filter();
+        if (query.getCourseType()!=null){
+            filter.add(QueryBuilders.termQuery("courseTypeId",query.getCourseType()));
+        }
+        if (query.getPriceMin()!=null&&query.getPriceMax()!=null){
+            filter.add(QueryBuilders.rangeQuery("price").gte(query.getPriceMin()).lte(query.getPriceMax()));
+        }
         builder.withQuery(boolQuery);
-        FieldSortBuilder order = SortBuilders.fieldSort(query.getSortField()).order(SortOrder.DESC);
-        builder.withSort(order);
+        SortOrder defaultSortOrder = SortOrder.DESC;
+        if (query.getSortType() != null && !query.getSortType().equals("desc")) {
+            defaultSortOrder = SortOrder.ASC;
+        }
+        if (StringUtils.hasLength(query.getSortField())&&query.getSortField().equals("jg")){
+            FieldSortBuilder order = SortBuilders.fieldSort("price").order(defaultSortOrder);
+            builder.withSort(order);
+        }
         builder.withPageable(PageRequest.of(query.getPage()-1,query.getRows()));
         NativeSearchQuery esQuery = builder.build();
         org.springframework.data.domain.Page<EsCourse> page =
@@ -144,14 +167,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         return  result;
     }
 
+    @Autowired
+    private CourseTypeMapper courseTypeMapper;
     private EsCourse course2EsCourse(Course course) {
         EsCourse result = new EsCourse();
         result.setId(course.getId());
         result.setName(course.getName());
         result.setUsers(course.getUsers());
+
         result.setCourseTypeId(course.getCourseTypeId());
-        if (course.getCourseType() != null)
-            result.setCourseTypeName(course.getCourseType().getName());
+        if (course.getCourseType() != null) {
+            String typeName = courseTypeMapper.selectById(course.getCourseType()).getName();
+            result.setCourseTypeName(typeName);
+        }
         result.setGradeId(course.getGrade());
         result.setGradeName(course.getGradeName());
         result.setStatus(course.getStatus());
@@ -161,12 +189,21 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         result.setUserName(course.getUserName());
         result.setStartTime(course.getStartTime());
         result.setEndTime(course.getEndTime());
-        result.setIntro(null);
-        result.setResources(null);
-        result.setExpires(null);
-        result.setPrice(null);
-        result.setPriceOld(null);
-        result.setQq(null);
+        List<CourseDetail> courseDetails = courseDetailMapper.selectList(new EntityWrapper<CourseDetail>()
+                .eq("course_id", course.getId()));
+        if (courseDetails!=null && courseDetails.size()>0){
+            result.setIntro(courseDetails.get(0).getIntro());
+        }
+        result.setResources(course.getPic());
+        List<CourseMarket> courseMarkets = courseMarketMapper.selectList(new EntityWrapper<CourseMarket>()
+                .eq("course_id", course.getId()));
+        if (courseMarkets!=null && courseMarkets.size()>0){
+            CourseMarket courseMarket = courseMarkets.get(0);
+            result.setExpires(courseMarket.getExpires());
+            result.setPrice(new BigDecimal(courseMarket.getPrice()));
+            result.setPriceOld(new BigDecimal(courseMarket.getPriceOld()));
+            result.setQq(courseMarket.getQq());
+        }
         return result;
     }
 

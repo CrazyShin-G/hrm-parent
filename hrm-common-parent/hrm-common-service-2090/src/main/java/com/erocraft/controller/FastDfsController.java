@@ -20,13 +20,14 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/fastDfs")
 public class FastDfsController {
+
     @PostMapping(produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
             , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public AjaxResult upload(@RequestPart(required = true,value = "file")MultipartFile file){
         try {
             System.out.println(file.getOriginalFilename() + ":" + file.getSize());
             String originalFilename = file.getOriginalFilename();
-
+            // xxx.jpg
             String extName = originalFilename.substring(originalFilename.lastIndexOf(".")+1);
             System.out.println(extName);
             String filePath =  FastDfsApiOpr.upload(file.getBytes(), extName);
@@ -37,8 +38,6 @@ public class FastDfsController {
         }
     }
 
-
-    //下载
     @GetMapping
     void download(@RequestParam(required = true,value = "path") String path, HttpServletResponse response){
         ByteArrayInputStream bis = null;

@@ -17,7 +17,8 @@ public class GenteratorCode {
 
     public static void main(String[] args) throws InterruptedException {
         //ResourceBundle rb = ResourceBundle.getBundle("mybatitsPlus-config-sysmanage");
-        ResourceBundle rb = ResourceBundle.getBundle("mybatitsPlus-config-course");
+//        ResourceBundle rb = ResourceBundle.getBundle("mybatitsPlus-config-course");
+        ResourceBundle rb = ResourceBundle.getBundle("mybatitsPlus-config-user");
         AutoGenerator mpg = new AutoGenerator();
 
         GlobalConfig gc = new GlobalConfig();
@@ -44,7 +45,8 @@ public class GenteratorCode {
         strategy.setNaming(NamingStrategy.underline_to_camel);
         //strategy.setInclude(new String[]{"t_systemdictionary","t_systemdictionaryitem","t_tenant_type"}); // 需要生成的表
         //strategy.setInclude(new String[]{"t_department", "t_employee","t_role","t_permission","t_menu","t_tenant","t_meal"}); // 需要生成的表
-        strategy.setInclude(new String[]{"t_course","t_course_detail","t_course_resource","t_course_market"});
+        //strategy.setInclude(new String[]{"t_course","t_course_detail","t_course_resource","t_course_market"});
+        strategy.setInclude(new String[]{"t_sso","t_vip_base"});
 
         mpg.setStrategy(strategy);
 

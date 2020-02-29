@@ -5,7 +5,6 @@ import com.erocraft.util.AjaxResult;
 import com.erocraft.util.RedisUtils;
 import org.springframework.web.bind.annotation.*;
 
-
 /**
  * @author 14179
  */
@@ -20,6 +19,19 @@ public class RedisController {
         try
         {
             RedisUtils.INSTANCE.set(key,value);
+            return AjaxResult.me();
+        }catch (Exception e){
+            e.printStackTrace();
+            return AjaxResult.me().setSuccess(false).setMessage("添加失败");
+        }
+    }
+
+    @PostMapping("/time")
+    AjaxResult addForTime(@RequestParam(value = "key",required = true) String key
+            ,@RequestParam(value = "value",required = true) String value,@RequestParam(value = "time",required = true)Integer time){
+        try
+        {
+            RedisUtils.INSTANCE.set(key,value,time);
             return AjaxResult.me();
         }catch (Exception e){
             e.printStackTrace();

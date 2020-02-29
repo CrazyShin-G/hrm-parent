@@ -18,6 +18,8 @@ public class GlobalCorsConfig {
         config.addAllowedOrigin("http://localhost:6001");
         config.addAllowedOrigin("http://127.0.0.1:6002");
         config.addAllowedOrigin("http://localhost:6002");
+        config.addAllowedOrigin("http://127.0.0.1:6003");
+        config.addAllowedOrigin("http://localhost:6003");
         config.setAllowCredentials(true);
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");
@@ -27,8 +29,7 @@ public class GlobalCorsConfig {
         config.addAllowedMethod("DELETE");
         config.addAllowedMethod("PATCH");
         config.addAllowedHeader("*");
-        UrlBasedCorsConfigurationSource configSource = new
-                UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();
         configSource.registerCorsConfiguration("/**", config);
         return new CorsFilter(configSource);
     }

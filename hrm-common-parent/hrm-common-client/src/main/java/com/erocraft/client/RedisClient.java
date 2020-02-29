@@ -7,7 +7,6 @@ import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 
-
 /**
  * @author 14179
  */
@@ -16,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public interface RedisClient {
     @PostMapping
     AjaxResult add(@RequestParam(value = "key", required = true) String key, @RequestParam(value = "value", required = true) String value);
+    @PostMapping("/time")
+    AjaxResult addForTime(@RequestParam(value = "key", required = true) String key
+            , @RequestParam(value = "value", required = true) String value, @RequestParam(value = "time", required = true) Integer time);
     @DeleteMapping
     AjaxResult del(@RequestParam(value = "key", required = true) String key);
     @GetMapping

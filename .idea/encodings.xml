@@ -14,5 +14,7 @@
     <file url="file://$PROJECT_DIR$/hrm-support-parent/hrm-zuul-gateway-1030/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-sysmanage-parent/hrm-sysmanage-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-sysmanage-parent/hrm-sysmanage-service-2010/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrm-user-parent/hrm-user-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrm-user-parent/hrm-user-service-2050/src/main/java" charset="UTF-8" />
   </component>
 </project>
