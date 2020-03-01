@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 14179
@@ -20,6 +21,18 @@ import java.util.List;
 public class SsoController {
     @Autowired
     public ISsoService ssoService;
+
+    @PostMapping("/login")
+
+    public AjaxResult login(@RequestBody Sso sso){
+       return ssoService.login(sso);
+    }
+
+    @PostMapping("/register")
+    public AjaxResult register(@RequestBody Map<String,String> params)
+    {
+        return ssoService.register(params);
+    }
 
 	@PostMapping
     public AjaxResult add(@RequestBody Sso sso){
@@ -58,6 +71,7 @@ public class SsoController {
             return AjaxResult.me().setMessage("保存失败"+e.getMessage());
         }
     }
+
     @GetMapping("/{id}")
     public Sso get(@PathVariable("id")Long id)
     {

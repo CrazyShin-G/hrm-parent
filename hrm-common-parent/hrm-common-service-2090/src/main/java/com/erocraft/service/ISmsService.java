@@ -9,10 +9,7 @@ import java.util.Map;
 /**
  * @author 14179
  */
-public interface IVerifycodeService {
-
-    String getImageCode(String imageCodeKey);
-
+public interface ISmsService {
 
     AjaxResult sendSmsCode(Map<String, String> params);
 }

@@ -39,10 +39,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\spring\hrm-parent\hrm-user-parent\hrm-user-service-2050\src\main\java\com\erocraft" />
-      <recent name="D:\spring\hrm-parent\hrm-user-parent\hrm-user-common\src\main\java\com\erocraft" />
-      <recent name="D:\spring\hrm-parent\hrm-support-parent\hrm-zuul-gateway-1030\src\main\java\com\erocraft\config" />
-      <recent name="D:\spring\hrm-parent\hrm-course-parent\hrm-course-service-2020\src\main\java\com\erocraft\service\impl" />
+      <recent name="D:\spring\hrm-parent\hrm-support-parent\hrm-zuul-gateway-1030\src\main\java\com\erocraft" />
       <recent name="D:\spring\hrm-parent\hrm-common-parent\hrm-common-service-2090\src\main\java\com\erocraft\controller" />
+      <recent name="D:\spring\hrm-parent\hrm-common-parent\hrm-common-service-2090\src\main\java\com\erocraft" />
+      <recent name="D:\spring\hrm-parent\hrm-common-parent\hrm-common-client\src\main\java\com\erocraft\client" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\spring\hrm-parent\hrm-basic-parent\mybatisplus-gen\src\main\resources" />
@@ -96,6 +96,8 @@
       <workItem from="1582876350798" duration="709000" />
       <workItem from="1582971235186" duration="3305000" />
       <workItem from="1582993013355" duration="83000" />
+      <workItem from="1582995313320" duration="429000" />
+      <workItem from="1583058459321" duration="5513000" />
     </task>
     <servers />
   </component>
@@ -119,10 +121,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582105913620" />
-    <state x="616" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1582993050651">
+    <state x="616" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583058507854">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="344" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582993050651" />
+    <state x="616" y="344" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583058507854" />
     <state x="334" y="126" key="new project wizard" timestamp="1582973178611">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

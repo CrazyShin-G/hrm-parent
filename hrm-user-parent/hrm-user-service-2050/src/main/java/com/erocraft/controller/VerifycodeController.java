@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-
 /**
  * @author 14179
  */
@@ -26,11 +25,11 @@ public class VerifycodeController {
     @PostMapping("/sendSmsCode")
     public AjaxResult sendSmsCode(@RequestBody Map<String,String> params)
     {
-        //发送短信验证码到那个手机
-//        mobile: this.formParams.mobile,
-//                //图片验证码信息要发过去 后台要校验图片验证
-//                imageCode:this.formParams.imageCode,
-//            imageCodeKey:localStorage.getItem("imageCodeKey")
+/*        发送短信验证码到那个手机
+        mobile: this.formParams.mobile,
+                //图片验证码信息要发过去 后台要校验图片验证
+                imageCode:this.formParams.imageCode,
+            imageCodeKey:localStorage.getItem("imageCodeKey")*/
            return verifycodeService.sendSmsCode(params);
 
     }

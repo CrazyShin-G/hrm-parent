@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/vipBase")
 public class VipBaseController {
-
     @Autowired
     public IVipBaseService vipBaseService;
 
@@ -71,7 +70,7 @@ public class VipBaseController {
 
         return vipBaseService.selectList(null);
     }
-
+    
     @PostMapping("/list")
     public PageList<VipBase> json(@RequestBody VipBaseQuery query)
     {

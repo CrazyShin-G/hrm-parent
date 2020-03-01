@@ -3,6 +3,9 @@ package com.erocraft.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.erocraft.domain.Sso;
+import com.erocraft.util.AjaxResult;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -14,4 +17,7 @@ import com.erocraft.domain.Sso;
  */
 public interface ISsoService extends IService<Sso> {
 
+    AjaxResult register(Map<String, String> params);
+
+    AjaxResult login(Sso sso);
 }
