@@ -16,6 +16,7 @@
         <module name="hrm-sysmanage-common" />
         <module name="hrm-common-service-2090" />
         <module name="hrm-common-common" />
+        <module name="hrm-basic-util" />
         <module name="hrm-sysmanage-service-2010" />
         <module name="hrm-page-common" />
         <module name="mybatisplus-gen" />
@@ -23,7 +24,6 @@
         <module name="hrm-page-parent" />
         <module name="hrm-page-client" />
         <module name="hrm-page-service-2030" />
-        <module name="hrm-basic-util" />
         <module name="hrm-page-agent-service-2040" />
         <module name="hrm-user-service-2050" />
         <module name="hrm-zuul-gateway-1030" />

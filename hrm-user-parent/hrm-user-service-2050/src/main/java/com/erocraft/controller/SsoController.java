@@ -22,8 +22,13 @@ public class SsoController {
     @Autowired
     public ISsoService ssoService;
 
-    @PostMapping("/login")
 
+    @GetMapping("/ac/{accessToken}")
+    public Sso querySso(@PathVariable("accessToken") String accessToken){
+        System.out.println(accessToken);
+        return ssoService.querySso(accessToken);
+    }
+    @PostMapping("/login")
     public AjaxResult login(@RequestBody Sso sso){
        return ssoService.login(sso);
     }

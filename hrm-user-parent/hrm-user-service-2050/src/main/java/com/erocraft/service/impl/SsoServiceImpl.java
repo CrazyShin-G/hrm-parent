@@ -44,10 +44,10 @@ public class SsoServiceImpl extends ServiceImpl<SsoMapper, Sso> implements ISsoS
         if (!StringUtils.hasLength(sso.getPhone()) || !StringUtils.hasLength(sso.getPassword())) {
             return AjaxResult.me().setSuccess(false).setMessage("请输入用户名或密码!");
         }
-
-        List<Sso> ssoList = ssoMapper.selectList(new EntityWrapper<Sso>().eq("phone", sso.getPhone()));
+        List<Sso> ssoList = ssoMapper.selectList(new EntityWrapper<Sso>()
+                .eq("phone", sso.getPhone()));
         if (ssoList==null || ssoList.size()<1) {
-            return  AjaxResult.me().setSuccess(false).setMessage("用户不存在,请注册!");
+            return  AjaxResult.me().setSuccess(false).setMessage("用户不存在!");
         }
 
         Sso ssoExsit = ssoList.get(0);
@@ -63,6 +63,12 @@ public class SsoServiceImpl extends ServiceImpl<SsoMapper, Sso> implements ISsoS
         String accessToken = UUID.randomUUID().toString();
         redisClient.addForTime(accessToken, JSONObject.toJSONString(ssoExsit),30*60);
         return AjaxResult.me().setResultObj(accessToken);
+    }
+
+    @Override
+    public Sso querySso(String accessToken) {
+        String sso = redisClient.get(accessToken);
+        return JSONObject.parseObject(sso,Sso.class);
     }
 
     public static void main(String[] args) {
@@ -103,15 +109,13 @@ public class SsoServiceImpl extends ServiceImpl<SsoMapper, Sso> implements ISsoS
 
 
     private AjaxResult validateParam(String mobile,String password,String smsCode){
-        // 手机号密码null校验
-        if (!StringUtils.hasLength(mobile) || !StringUtils.hasLength(password))
+        if (!StringUtils.hasLength(mobile) || !StringUtils.hasLength(password)) {
             return AjaxResult.me().setSuccess(false).setMessage("请输入用户名或密码!");
-        // 手机号时候已经注册
+        }
         List<Sso> ssoList = ssoMapper.selectList(new EntityWrapper<Sso>().eq("phone", mobile));
         if (ssoList!=null&&ssoList.size()>0)
-            return AjaxResult.me().setSuccess(false).setMessage("您已经注册过了!可以直接使用!");
-        // 短信验证码校验 通过key从redis获取
-        String smsCodeStr = redisClient.get("SMS_CODE:" + mobile); // code:time
+            return AjaxResult.me().setSuccess(false).setMessage("您已经注册过了!");
+        String smsCodeStr = redisClient.get("SMS_CODE:" + mobile);
         String smsCodeOfRedis = smsCodeStr.split(":")[0];
         if (!smsCodeOfRedis.equals(smsCode))
             return AjaxResult.me().setSuccess(false).setMessage("请输入正确短信验证码");

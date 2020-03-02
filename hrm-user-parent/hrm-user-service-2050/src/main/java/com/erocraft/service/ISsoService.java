@@ -20,4 +20,6 @@ public interface ISsoService extends IService<Sso> {
     AjaxResult register(Map<String, String> params);
 
     AjaxResult login(Sso sso);
+
+    Sso querySso(String accessToken);
 }

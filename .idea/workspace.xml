@@ -30,22 +30,22 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hrm-user-parent/hrm-user-service-2050/src/main/java/com/erocraft" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hrm-support-parent/hrm-zuul-gateway-1030/src/main/java/com/erocraft/config" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\spring\hrm-parent\hrm-user-parent\hrm-user-service-2050\src\main\java\com\erocraft" />
-      <recent name="D:\spring\hrm-parent\hrm-support-parent\hrm-zuul-gateway-1030\src\main\java\com\erocraft" />
-      <recent name="D:\spring\hrm-parent\hrm-common-parent\hrm-common-service-2090\src\main\java\com\erocraft\controller" />
-      <recent name="D:\spring\hrm-parent\hrm-common-parent\hrm-common-service-2090\src\main\java\com\erocraft" />
-      <recent name="D:\spring\hrm-parent\hrm-common-parent\hrm-common-client\src\main\java\com\erocraft\client" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\spring\hrm-parent\hrm-basic-parent\mybatisplus-gen\src\main\resources" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\spring\hrm-parent\hrm-support-parent\hrm-zuul-gateway-1030\src\main\java\com\erocraft\config" />
+      <recent name="D:\spring\hrm-parent\hrm-user-parent\hrm-user-service-2050\src\main\java\com\erocraft\controller" />
+      <recent name="D:\spring\hrm-parent\hrm-user-parent\hrm-user-service-2050\src\main\java\com\erocraft\service\impl" />
+      <recent name="D:\spring\hrm-parent\hrm-user-parent\hrm-user-service-2050\src\main\java\com\erocraft\service" />
+      <recent name="D:\spring\hrm-parent\hrm-user-parent\hrm-user-service-2050\src\main\java\com\erocraft" />
     </key>
   </component>
   <component name="RunManager">
@@ -98,6 +98,9 @@
       <workItem from="1582993013355" duration="83000" />
       <workItem from="1582995313320" duration="429000" />
       <workItem from="1583058459321" duration="5513000" />
+      <workItem from="1583108172472" duration="51000" />
+      <workItem from="1583148712151" duration="1073000" />
+      <workItem from="1583164740876" duration="628000" />
     </task>
     <servers />
   </component>
@@ -121,10 +124,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1582105913620" />
-    <state x="616" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583058507854">
+    <state x="616" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583165001637">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="344" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583058507854" />
+    <state x="616" y="344" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1583165001637" />
     <state x="334" y="126" key="new project wizard" timestamp="1582973178611">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
