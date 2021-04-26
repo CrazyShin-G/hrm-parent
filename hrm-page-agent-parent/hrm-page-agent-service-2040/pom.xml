@@ -51,7 +51,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>2.7</version>
         </dependency>
         <!-- 给调用的模块来转换json-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson  调用者需要转换-->
